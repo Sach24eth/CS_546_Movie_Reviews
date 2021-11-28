@@ -1,9 +1,9 @@
 import usersData from "./users";
 import data_Products from "./products";
-import reviewsData from "./reviews";
+import community from "./community";
 
 module.exports = {
-  users: usersData,
-  reviews:reviewsData,
-  products: data_Products
+    users: usersData,
+    products: data_Products,
+    community: community,
 };
