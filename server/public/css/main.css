@@ -372,3 +372,8 @@ ul,li,body{padding: 0;margin: 0;}
   *display:inline;
   *zoom:1;
 }
+
+#chart{
+  height:250px;
+  width:300px;
+}
