@@ -76,6 +76,7 @@ exports.defaultNewUser = {
     reviewCounter: 0,
     likedProducts: [],
     photo: {},
+    reportedReviews: [],
 };
 
 exports.saltRounds = 12;

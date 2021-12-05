@@ -16,5 +16,5 @@ module.exports = {
     users: getCollection("users"),
     products: getCollection("products"),
     community: getCollection("community"),
-    reviews:getCollection("reviews")
+    reviews: getCollection("reviews"),
 };
