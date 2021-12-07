@@ -244,6 +244,13 @@ footer a {
     font-size: 0.7rem;
 }
 
+invalid-feedback-error {
+    font-size: 0.8rem;
+    width: 100%;
+    margin-top: 0.25rem;
+    color: #dc3545;
+}
+
 #signUpForm label {
     display: none;
 }
@@ -628,4 +635,21 @@ body {
 .tagPill:focus {
     outline: none;
     transform: scale(0.6);
+}
+
+.hideError {
+    display: none !important;
+}
+
+@media (min-width: 768px) {
+    #searhcForm {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+}
+
+#userAvatar,
+.loginBtn,
+.logoutBtn {
+    color: white;
 }

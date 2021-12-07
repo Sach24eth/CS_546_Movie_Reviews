@@ -26,6 +26,7 @@ const storage = multer.diskStorage({
 
     //add back the extension
     filename: function (request, file, callback) {
+        console.log("here");
         callback(null, Date.now() + file.originalname);
     },
 });
@@ -56,8 +57,6 @@ router.post("/search", async (req, res) => {
         return "Error: Search term blank";
     } else {
         searchTerm = searchTerm.toLowerCase();
-        //console.log(searchTerm);
-        //console.log(searchValue);
         if (searchValue === "name" || searchValue === "Search product by") {
             try {
                 let search_List = await productData.getProductByProductName(
@@ -86,18 +85,27 @@ router.post("/search", async (req, res) => {
     }
 });
 
+router.get("/addProducterror", (req, res) => {
+    const { addProductError } = req.session;
+    const error = addProductError;
+    req.session.addProductError = false;
+    return res.status(200).json({
+        error: addProductError,
+    });
+});
+
 router.post(
     "/addProduct",
-    upload.single("photo"),
     authMiddleware,
+    upload.single("photo"),
     async (req, res) => {
         if (!req.session.user) {
             res.status(401).redirect("/");
         } else {
+            req.session.addProductError = false;
             //check what all is required after making the front end form
             let { productName, description, websiteUrl, tags, developer } =
                 req.body;
-            console.log("req.body :>> ", req.body);
             productName = productName.toLowerCase();
             productName = xss(productName);
             description = xss(description);
@@ -163,10 +171,14 @@ router.post(
                     tagarr,
                     developer
                 );
-                console.log(newProduct);
+                console.log("new", newProduct);
                 res.redirect("/");
             } catch (e) {
-                return res.status(500).json({ message: `${e}` });
+                console.log("error", e);
+                req.session.addProductError = e;
+                res.redirect("/");
+                // res.redirect("/products/addProducterror");
+                // return res.status(500).json({ message: e, errorMessage: e });
             }
         }
     }

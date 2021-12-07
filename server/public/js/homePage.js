@@ -7,19 +7,29 @@
     var productDescriptionField = document.getElementById("productDescription");
     var productUrl = document.getElementById("productUrl");
     var productTag = document.getElementById("productTag");
-    var photo = document.getElementById("productLogo");
+    var profileFileField = document.getElementById("file");
+    var developer = document.getElementById("developer");
     productNameField.addEventListener("input", function () {
         var val = document.getElementById("productName").value;
-        if (!val || val.length < 2) {
+        if (!checkValidString(val)) {
             productNameField.setCustomValidity("invalid");
         } else {
             productNameField.setCustomValidity("");
         }
     });
 
+    developer.addEventListener("input", function () {
+        var val = document.getElementById("developer").value;
+        if (!checkValidString(val)) {
+            developer.setCustomValidity("invalid");
+        } else {
+            developer.setCustomValidity("");
+        }
+    });
+
     productDescriptionField.addEventListener("input", function () {
         var val = document.getElementById("productDescription").value;
-        if (!val || val.length < 2) {
+        if (!checkValidString(val)) {
             productDescriptionField.setCustomValidity("invalid");
         } else {
             productDescriptionField.setCustomValidity("");
@@ -28,16 +38,7 @@
 
     productUrl.addEventListener("input", function () {
         var val = document.getElementById("productUrl").value;
-        if (!val || val.length < 2) {
-            productUrl.setCustomValidity("invalid");
-        } else {
-            productUrl.setCustomValidity("");
-        }
-    });
-
-    productUrl.addEventListener("input", function () {
-        var val = document.getElementById("productUrl").value;
-        if (!val || val.length < 2) {
+        if (!checkValidWebUrl(val)) {
             productUrl.setCustomValidity("invalid");
         } else {
             productUrl.setCustomValidity("");
@@ -46,28 +47,50 @@
 
     productTag.addEventListener("input", function () {
         var val = document.getElementById("productTag").value;
-        if (!val || val.length < 2) {
+        if (!checkValidTag(val)) {
             productTag.setCustomValidity("invalid");
         } else {
             productTag.setCustomValidity("");
         }
     });
 
-    photo.addEventListener("input", function () {
-        var val = document.getElementById("productLogo").value;
-        console.log("val", val);
+    profileFileField.addEventListener("input", function () {
+        var val = document.getElementById("file").value;
         const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
         const fileType = this.files[0].type;
+        console.log("here :>> ", val);
         if (
             !fileType ||
             !validImageTypes.includes(fileType) ||
-            this.files[0].size / 1024 / 1024 > 2
+            this.files[0].size / 1024 / 1024 > 3
         ) {
-            photo.setCustomValidity("invalid");
+            profileFileField.setCustomValidity("invalid");
         } else {
-            photo.setCustomValidity("");
+            profileFileField.setCustomValidity("");
         }
     });
+
+    function checkValidString(val) {
+        if (!val || val.length < 2) {
+            return false;
+        }
+        return true;
+    }
+
+    function checkValidWebUrl(val) {
+        let re =
+            /^(http:\/\/|https:\/\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[‌​a-z]{3}\.([a-z]+)?$/gm;
+        const data = re.test(val);
+
+        return data;
+    }
+
+    function checkValidTag(val) {
+        if (!val || val.length < 2) {
+            return false;
+        }
+        return true;
+    }
 
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms).forEach(function (form) {
@@ -91,13 +114,11 @@
         const rating = Math.floor(
             $(`[data-productid=${ratingId}]`).attr("data-rating")
         );
-        console.log("ratingId :>> ", ratingId);
         if (rating == 0) {
             $(`[data-productid=${ratingId}]`).append(
                 `<span class="fa fa fa-star-o uncheckedStar" ></span> <span class="fa fa fa-star-o uncheckedStar" ></span> <span class="fa fa fa-star-o uncheckedStar" ></span> <span class="fa fa fa-star-o uncheckedStar" ></span> <span class="fa fa fa-star-o uncheckedStar" ></span>`
             );
         } else {
-            console.log(`rating`, rating);
             for (i = rating; i > 0; i--) {
                 $(`[data-productid=${ratingId}]`).append(
                     `<span class="fa fa-star"></span>`
@@ -108,34 +129,6 @@
                     `<span class="fa fa-star-o uncheckedStar" ></span>`
                 );
             }
-        }
-    }
-
-    function isValidString(val) {
-        console.log("here");
-        if (typeof val !== "string" || val.trim().length < 2) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    function isValidwebsiteUrl(websiteUrl) {
-        let midString = websiteUrl.substring(
-            websiteUrl.indexOf(".") + 1,
-            websiteUrl.lastIndexOf(".")
-        );
-        if (typeof websiteUrl !== "string" || websiteUrl.trim().length < 1) {
-            return false;
-        } else if (
-            websiteUrl.startsWith("http://www.") &&
-            websiteUrl.endsWith(".com")
-        ) {
-            return false;
-        } else if (midString.length < 5) {
-            return false;
-        } else {
-            return true;
         }
     }
 })();
