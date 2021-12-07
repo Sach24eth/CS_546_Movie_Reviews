@@ -12,6 +12,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   height: 100vh;
   margin: 0px 0 20px;
+  color: #212529;
 }
 
 .border-6 {
@@ -595,12 +596,6 @@ body {
   position: fixed;
 }
 
-#addProductButton {
-  position: absolute;
-  top: 150px;
-  right: 50px;
-}
-
 .top-div {
   display: flex;
   height: 56px;
@@ -758,17 +753,17 @@ button.getProd {
   color: white;
 }
 
-#review{
-  width:100%;
-  height:auto;
-  top:700px;
-  position:absolute;
-  margin-left:20%;
+#review {
+  width: 100%;
+  height: auto;
+  top: 700px;
+  position: absolute;
+  margin-left: 20%;
 }
 
-.description{
-  width:600px;
-  height:auto;
+.description {
+  width: 600px;
+  height: auto;
   font-size: 20px;
-  padding:5px;
+  padding: 5px;
 }

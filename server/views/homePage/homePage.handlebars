@@ -2,10 +2,10 @@
 <h2>No products found!</h2>
 {{else}}
 
-<div class="jumbotron w-100 mx-5">
+<div class="jumbotron w-100 mx-5 d-flex flex-column">
   <!-- Button trigger modal -->
   {{#if authenticated}}
-  <div>
+  <div class="d-flex align-items-center justify-content-end m-2">
     <button
       type="button"
       data-toggle="modal"
@@ -15,13 +15,17 @@
       Add Product
     </button>
   </div>
+  {{/if}}
   <div>
-    {{/if}} {{#each products}}
-    <div>
-      <a href="/product/{{_id}}">
-        <div class="card d-flex align-items-center mx-5" style="width: 18rem;">
+    <div class="d-flex flex-row flex-wrap">
+      {{/if}} {{#each products}}
+      <a href="/products/{{_id}}">
+        <div
+          class="card d-flex align-items-center mx-5 rounded"
+          style="width: 18rem;"
+        >
           <img
-            class="card-img-top img-"
+            class="card-img-top p-2 rounded"
             src="/public/images/upload/{{this.logo}}"
             alt="{{this.productName}}"
             width="240"
@@ -29,7 +33,7 @@
           />
           <h3>{{this.productName}}</h3>
           <div
-            class="likeRating d-flex flex-row align-items-center justify-content-evenly w-50"
+            class="likeRating d-flex flex-row align-items-center justify-content-evenly w-75"
           >
             <div
               class="likes d-flex flex-row justify-content-space-between w-50 align-items-center"
@@ -59,8 +63,8 @@
           </div>
         </div>
       </a>
+      {{/each}}
     </div>
-    {{/each}} {{/if}}
   </div>
 
   <!-- Modal -->
