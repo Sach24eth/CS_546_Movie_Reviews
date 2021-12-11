@@ -94,17 +94,10 @@ const exportedMethods = {
       { $set: updated }
     );
     if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount)
-<<<<<<< HEAD
-      throw "Update rating failed";
-
-    return insertInfo;
-  },
-=======
       throw 'Update rating failed'; 
   
     return newReview;
     },
->>>>>>> 1837b15 (added seed file and files to populate databse)
 
   async AddReviewToUser(userid, reviewId) {
     if (!userid) throw "You must provide an id";

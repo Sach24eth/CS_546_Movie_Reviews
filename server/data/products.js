@@ -32,14 +32,9 @@ function checkInputs(
 
   let re = /^(http:\/\/|https:\/\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[‌​a-z]{2}\.([a-z]+)?$/gm;
   if (!re.test(websiteUrl)) {
-<<<<<<< HEAD
-    throw "Website URL provided does not satisfy proper criteria (route)";
-  }
-=======
     throw "Error: website url is not valid.";
   }
  // console.log("tag", tags);
->>>>>>> 1837b15 (added seed file and files to populate databse)
   if (!Array.isArray(tags) || tags.length === 0)
     throw "Error: Tag is not of string type or tag field is empty";
   //let parsedTags = [...new Set(tags)];
