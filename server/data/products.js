@@ -30,11 +30,16 @@ function checkInputs(
   if (typeof websiteUrl !== "string" || websiteUrl.trim().length < 1)
     throw "Error: website_Url is not a string";
 
-  let re =
-    /^(http:\/\/|https:\/\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[‌​a-z]{2}\.([a-z]+)?$/gm;
+  let re = /^(http:\/\/|https:\/\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[‌​a-z]{2}\.([a-z]+)?$/gm;
   if (!re.test(websiteUrl)) {
+<<<<<<< HEAD
     throw "Website URL provided does not satisfy proper criteria (route)";
   }
+=======
+    throw "Error: website url is not valid.";
+  }
+ // console.log("tag", tags);
+>>>>>>> 1837b15 (added seed file and files to populate databse)
   if (!Array.isArray(tags) || tags.length === 0)
     throw "Error: Tag is not of string type or tag field is empty";
   //let parsedTags = [...new Set(tags)];
@@ -108,7 +113,7 @@ let exportedMethods = {
       reviews: [],
       rating: 0.0,
       likes: 0,
-      devId: devId,
+      devId: devId
     };
     const checkProd = await productList.findOne({
       productName: productName,
@@ -166,6 +171,12 @@ let exportedMethods = {
     return soredTagByLikes;
   },
   async updateCount(prodId, liked) {
+    if(typeof prodId === "undefined") throw"prodId is not provided";
+    if(typeof liked === "undefined") throw "liked is not provided";
+    if(typeof prodId != "string") throw"prodId is not a string";
+    if(typeof liked != "boolean") throw"liked is not a boolean value";
+    if(prodId.trim() === "") throw"prodId is blank";
+
     let objId = ObjectId(prodId);
     const productCollection = await products();
     const product = await productCollection.findOne({ _id: objId });
